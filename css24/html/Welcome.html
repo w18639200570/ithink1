@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+		<script src="../2.0.0/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/angular.js/1.3.4/angular.min.js"></script>
+   		<script src="https://cdn.bootcss.com/angular-ui-router/1.0.0/angular-ui-router.min.js"></script>
+		<script src="https://cdn.bootcss.com/angular-file-upload/2.5.0/angular-file-upload.min.js"></script>
+		<link rel="stylesheet" href="../css/backfront.css" />
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			.upload {
+				position: relative;
+				left: 13px;
+    			display: inline-block;
+    			background: #D0EEFF;
+    			border: 1px solid #99D3F5;
+    			border-radius: 4px;
+    			padding: 4px 8px;
+    			overflow: hidden;
+    			color: #1E88C7;
+    			text-align: center;
+    			line-height: 30px;
+			}
+			.upload input {
+				position: absolute;
+				right: 0;
+    			top: 0;
+    			font-size: 100px;
+    			opacity: 0;
+			}
+			.upload:hover {
+				border-color: deepskyblue;
+			}
+			.tip {
+				display: inline-block;
+				height: 40px;
+			}
+		</style>
+	</head>
+	<body ng-app="routeapp">
+		<div class="container" style="width: 97%;">
+			<div class="row list-group-item active" style="padding: 30px;border-radius: 5px">
+				<div class="col-md-8" style="font-size: 26px;text-shadow: 5px 5px 5px #FF0000;">TTJOB后台</div>
+				<div class="col-md-1" style="font-size: 20px;text-shadow: 5px 5px 5px #FF0000;">管理员</div>
+				<div class="col-md-1" style="font-size: 20px;text-shadow: 5px 5px 5px #FF0000;">图</div>
+				<div class="col-md-1" style="font-size: 20px;text-shadow: 5px 5px 5px #FF0000;">刘德华</div>
+				<div class="col-md-1" style="font-size: 20px;text-shadow: 5px 5px 5px #FF0000;">退出</div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3" style="width: 25%;">
+					<div class="row" style="margin-right: 10px;">
+					<div class="list-group" style="margin-bottom: 3px;">
+						<a href="#" class="list-group-item active">
+                    	<h4 class="list-group-item-heading">欢迎页</h4>
+    			    	</a>
+					</div>
+					<div class="list-group" style="margin-bottom: 3px;" ui-sref="list">
+    					<a href="#/list" class="list-group-item active">
+        					<h4 class="list-group-item-heading">信息管理</h4>
+    					</a>
+     					<a href="#" class="list-group-item">
+        					<h4 class="list-group-item-heading">公司信息</h4>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <h4 class="list-group-item-heading">职位信息</h4>
+    					</a>
+                   </div>
+                   <div class="list-group" style="margin-bottom: 3px;" ui-sref="nedit">
+    					<a href="#/nedit"  class="list-group-item active">
+        					<h4 class="list-group-item-heading">内容管理</h4>
+    					</a>
+     					<a href="#" class="list-group-item">
+        					<h4 class="list-group-item-heading">Article管理</h4>
+                       	</a>
+                   </div>
+                   <div class="list-group" ui-sref="info">
+    					<a href="#/info" class="list-group-item active">
+        					<h4 class="list-group-item-heading">后台管理</h4>
+    					</a>
+     					<a href="#" class="list-group-item">
+        					<h4 class="list-group-item-heading">账号管理</h4>
+                       	</a>
+                       	<a href="#" class="list-group-item">
+        					<h4 class="list-group-item-heading">角色管理</h4>
+                       	</a>
+                       	<a href="#" class="list-group-item">
+        					<h4 class="list-group-item-heading">修改密码</h4>
+                       	</a>
+                       	<a href="#" class="list-group-item">
+        					<h4 class="list-group-item-heading">模块管理</h4>
+                       	</a>
+                   </div>
+                  </div>
+				</div>
+				<div class="col-md-9" style="padding: 0;">
+					<div ui-view="" class="row">
+					</div>
+				</div>
+			</div>
+		</div>
+	<script src="../js/app.js"></script>
+	</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <script src="../js/angular-min.js"></script>
+    <script src="../js/angular-route-min.js"></script>
+    <script src="../2.0.0/jquery.min.js"></script>
+</head>
+<style>
+    *{margin: 0;padding: 0}
+    body{
+        text-align: center;
+        background-image: url(../img/starnight.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .enter{
+        position: fixed;
+        top: 40%;
+        margin: 0 30%;
+        width: 40%;
+        padding: 30px 0;
+        background-color: #BBC1CC;
+    }
+    h4{
+        padding-bottom: 20px;
+        line-height: normal;
+        color: #03A9F3;
+    }
+    h5 {
+        margin: 5px 10%;
+        padding: 5px 0;
+        text-align: left;
+        background-color: #FFFFFF;
+    }
+    button{
+        width: 80%;
+        height: 40px;
+        margin-top: 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        color: #FFFFFF;
+        background-color: #03A9F3;
+        border: none;
+    }
+    img{
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 5px;
+        border-right: solid 1px #B7B7B7;
+    }
+    input.ng-dirty {
+    	background-color: lightblue;
+    }
+</style>
+<body data-ng-app="loginapp" data-ng-controller="loginctr">
+<div class="enter">
+    <h4>后台登录</h4>
+    <form name="myForm">
+    	<h5><img src="../img/user.png"><input name="uname" type="text" style="width: 85%;border: none;height: 28px;outline: none;padding-left: 5px" placeholder="用户" id="user" ng-model="name" required></h5>
+    	<h5><img src="../img/password.png"><input name="upwd" type="password" style="width: 85%;border: none;height: 28px;outline: none;padding-left: 5px" placeholder="密码" id="password" ng-model="pad" required></h5>
+    </form>
+    <h5 style="background-color: #BBC1CC;color: #FF0000" id="out"></h5>
+    <span style="color:red;float: left;" ng-show="myForm.uname.$dirty && myForm.uname.$invalid">
+  		<span ng-show="myForm.uname.$error.required">用户名是必须的</span></span>
+  	<span style="color:red;float: left;" ng-show="myForm.upwd.$dirty && myForm.upwd.$invalid">
+  		<span ng-show="myForm.upwd.$error.required">密码为空</span></span>
+    <button style="margin-top: 20px;" type="button" id="btn" data-ng-click="handin()">登录</button>
+</div>
+<div>
+	name:{{name}}<br />
+	pwd:{{pad}}
+</div>
+<script src="../js/register.js"></script>
+<script>
+    var a=window.innerHeight;
+    document.getElementsByTagName('body')[0].style.height=a+'px';
+    var app=angular.module('loginapp',['ngRoute']);
+    app.controller('loginctr',function ($scope,$http) {
+    	$scope.handin=function  () {
+  /*  		var user=$scope.name;
+    		var pass=$scope.pad;
+    		console.log(user);
+    		console.log(pass);
+    		$http({  
+    			method:'post',  
+    			url:'/api/a/login',
+    			data:{name:user,pwd:pass},
+    		}
+    			.success(function(respone){console.log(respone)})
+    	}*/
+   }
+   });
+</script>
+</body>
+</html>

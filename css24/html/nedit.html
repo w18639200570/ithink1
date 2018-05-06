@@ -1,0 +1,207 @@
+<div class="container" style="width: 97%;">
+	<div class="row">
+		<h4 class="list-group-item active" style="margin-top: 0;">新增/编辑</h4>
+	</div>
+    <div class="row" style="margin-top: 30px;">
+        <form class="form-horizontal" id="formnedit" name="user1">
+            <div class="form-group">
+                <label class="col-md-2 control-label">标题名称</label>
+                <div class="col-md-5">
+                    <input type="text" name="tit" class="form-control" ng-model="Title" ng-maxlength="6" required>
+                </div>
+				<div class="col-md-2" style="color: red;padding-top: 8px" ng-show="user1.tit.$error.required">*必填</div>
+				<div class="col-md-2" style="color: red;padding-top: 8px" ng-show="user1.tit.$error.maxlength">字数不能超过6个</div>
+            </div>
+        </form>
+    </div>
+	<div class="row">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-md-2 control-label">类型</label>
+				<div class="col-md-2">
+					<select class="form-control" ng-model="Type">
+						<option>请选择</option>
+						<option>首页banner</option>
+						<option>找职位banner</option>
+						<option>找精英banner</option>
+						<option>行业大图</option>	
+					</select>
+				</div>
+				<div class="col-md-2" style="color:red;padding-top: 8px;" ng-show="Type==('请选择'||'')">
+					类型不能为空
+				</div>
+                <div class="col-md-2" ng-show="Type=='行业大图'">
+                    <select class="form-control">
+                        <option>请选择</option>
+                        <option>O2O</option>
+                        <option>互联网</option>
+                        <option>金融</option>
+                        <option>工业</option>
+                    </select>
+                </div>
+			</div>
+		</form>
+    </div>
+	<div class="row">
+		<form class="form-horizontal" name="user2">
+			<div class="form-group">
+				<label class="col-md-2 control-label">内容</label>
+				<div class="col-md-8" id="editor">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<form class="form-horizontal" name="user3">
+			<div class="form-group">
+				<label class="col-md-2 control-label">跳转链接</label>
+				<div class="col-md-6">
+					<input type="url" name="URL" class="form-control" ng-model="Url" ng-pattern="/(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)/" required>
+				</div>
+				<div class="col-md-3" style="color:red;padding-top: 8px;" ng-show="user3.URL.$error.url">
+					格式为：http://www.baidu.com
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="row" style="margin-top: 10px;">
+		<form class="form-horizontal" id="uploadForm" enctype="multipart/form-data" name="user2">
+			<div class="form-group" >
+				<label class="col-md-2 control-label" >配图</label>
+				<div class="col-md-1 upload">
+					选择文件<input name="file" id="File" type="file" file-model="myFile"  accept="image/png,image/jpg" style="padding-top: 3px;" required>
+				</div>
+				<div class="col-md-2 fileerrorTip" style="padding-top: 10px;"></div>
+			</div>
+		</form>
+	</div>
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+			<img src="" id="image" style="height: 75px;" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-9">
+			<div class="row">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-md-3">图片名</div>
+						<div class="col-md-2">文件大小</div>
+						<div class="col-md-3">进度</div>
+						<div class="col-md-1">操作</div>
+						<div class="col-md-3" style="text-align: center;">操作</div>
+					</div>
+				</div>
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-md-3 showFileName"></div>
+						<div class="col-md-2 showFileSize"></div>
+						<div class="col-md-3">
+							<progress id="pro" value="0"></progress>
+						</div>
+						<div class="col-md-1" id="right" style="text-align: center;"></div>
+						<div class="col-md-3">
+							<div class="col-md-6">
+								<button type="button" id="submit" class="btn btn-success" onclick="showImage(a);readerBinary();">上传</button>
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-danger">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin: 10px 0;">
+		<div class="col-md-2"></div>
+		<div class="col-md-2">
+			<button type="button" class="btn btn-info" ng-click="suBmit(Title,Type,Url)">立即上线</button>
+		</div>
+		<div class="col-md-2">
+			<button type="button" class="btn btn-info" onclick="recive(a)" ng-disabled="(!user1.tit.$valid)||(!user3.URL.$valid)">存为草稿</button>
+		</div>
+		<div class="col-md-2"></div>
+		<div class="col-md-2">
+			<button type="button" class="btn">取消</button>
+		</div>
+	</div>
+	<div>
+		{{user1.tit.$valid}}
+		{{!Isdisable}}
+		{{user3.URL.$valid}}
+	</div>
+</div>
+<script>
+	var a;
+	$(".upload").on("change","input[type='file']",function() {
+	a=this;
+	var imageEle = document.getElementById("File");  
+    var filelist = imageEle.files; 
+	var file = filelist[0];
+    var filePath=$(this).val();
+    if(filePath.indexOf("jpg")!==-1 || filePath.indexOf("png")!==-1){
+        $(".fileerrorTip").html("").hide();
+        var arr=filePath.split('\\');
+        var fileName=arr[arr.length-1];
+        $(".showFileName").html(fileName);
+        $(".showFileSize").html(parseInt(file.size)+'B');
+    }else{
+        $(".showFileName").html("");
+        $(".fileerrorTip").html("您上传文件类型有误！").show();
+        return false ;
+    	}
+	});
+	function showImage (source) {
+		var file = source.files[0]; 
+		if(window.FileReader) {
+			var fr=new FileReader();
+			fr.onloadend=function(e) {
+				document.getElementById("image").src = e.target.result;  
+			};
+			fr.readAsDataURL(file);  
+		}
+	}
+	var reader = null;  
+	var readerBinary = function () {
+	reader = new FileReader();  
+    reader.readAsArrayBuffer(document.getElementById("File").files[0]);  
+    var pro = document.getElementById("pro");  
+    pro.max = document.getElementById("File").files[0].size;  
+            //读取不中断则触发该事件  
+    reader.onprogress = function (evt) {  
+            pro.value = evt.loaded;  
+    };
+    $('#right').html('✔');
+    };
+/*	jq上传不了图片
+	function submitImage (source) {
+		var formData=new FormData();
+        formData.append('name','admin');
+		formData.append('pwd','123456');
+		formData.append('img',$('#uploadForm')[0]);
+        formData.append('title','aka');
+        formData.append('type',1);
+        formData.append('status',2);
+        formData.append('url','www.baidu.com');
+        $.ajax({
+            url: "/api/a/u/article",
+            type: "POST",
+            data: formData,
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false   // 告诉jQuery不要去设置Content-Type请求头
+        });
+	} */
+	function recive (source) {
+		var formdata=new FormData();
+		formdata.append('img',source.files[0]);
+		formdata.append('title','tsj');
+		formdata.append('type',1);
+		formdata.append('status',1);
+		formdata.append('url','www.baidu.com');
+	}
+
+</script>
+
